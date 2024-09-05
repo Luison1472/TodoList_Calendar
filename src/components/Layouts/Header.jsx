@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Header({currentYear}) {
+function Header({currentYear, onAddClick}) {
   return (
     <header className="flex flex-col justify-between items-center p-4 bg-gray-950 border-b border-gray-700 mb-2">
       <div className="flex justify-between items-center w-full">
@@ -10,7 +10,7 @@ function Header({currentYear}) {
         </div>
 
         <div>
-          <button className="text-3xl text-red-500">+</button>
+          <button className="text-3xl text-red-500" onClick={onAddClick}>+</button>
         </div>
       </div>
 

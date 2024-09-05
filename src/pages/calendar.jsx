@@ -1,61 +1,7 @@
 import React, { useState, useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
+import MonthView from '/src/components/MonthView.jsx'; // MonthView 컴포넌트 임포트
 
-//특정 월의 시작 날짜가 무슨 요일인지 계산
-const getMonthDays = (year, month) => {
-  const firstDay = new Date(year, month, 1).getDay(); //해당 연도, 월의 첫째 날
-  const daysInMonth = new Date(year, month + 1, 0).getDate(); //해당 월의 총 일수 , 이전 달의 마지막 날짜
-  const days = []; //날짜 데이터 배열
-
-  for (let i = 0; i < firstDay; i++) { //첫 번째 주 빈칸 채우기 (ex.31일이 목요일 경우)
-    days.push(null);
-  }
-
-  for (let i = 1; i <= daysInMonth; i++) { //해당 월의 날짜 채우기
-    days.push(new Date(year, month, i));
-  }
-
-  return days;
-};
-
-//달력을 뷰포트에 표시
-function MonthView({ year, month, events }) {
-  const monthDays = getMonthDays(year, month);
-  const monthName = new Date(year, month).toLocaleString('default', { month: 'long' });
-
-  //오늘 날짜를 저장하는 isToday 함수 (오늘 날짜로 돌아오게 하는 함수)
-  const today = new Date();
-  const isToday = (date) =>
-    date &&
-    date.getDate() === today.getDate() &&
-    date.getMonth() === today.getMonth() &&
-    date.getFullYear() === today.getFullYear(); //받은 날짜들을 &&연산자로 true or false 반환
-
-  return (
-    <div className="mb-8">
-      <h2 className="text-xl font-bold text-red-600 mb-4">
-        {monthName}
-      </h2>
-      <div className="grid grid-cols-7 gap-2 text-center border-b border-gray-800">
-        {monthDays.map((day, index) => (
-          <div
-            key={index}
-            // 현재 날짜에는 빨간색으로, 일정이 있을 땐 노란색으로 표시
-            className={`h-9 w-9 flex items-center justify-center
-              ${day ? 'text-white' : ''}
-              ${day && events && events[day.toDateString()] ? 'bg-yellow-500 text-black' : ''}
-              ${isToday(day) ? 'bg-red-600 text-white rounded-full' : ''}`}
-          >
-            <span className="leading-none">
-              {day ? day.getDate() : ''}
-            </span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-const Calendar = forwardRef(({ events, setCurrentYear = () => { } }, ref) => {
+const Calendar = forwardRef(({ events, setCurrentYear = () => { },onDateClick }, ref) => {
   const [months, setMonths] = useState([
     { year: 2024, month: 8 },  // 처음엔 9월 데이터로 ,시작 0번~
     { year: 2024, month: 9 },  // 10월
@@ -153,11 +99,11 @@ const Calendar = forwardRef(({ events, setCurrentYear = () => { } }, ref) => {
     });
   };
 
-  // 뷰포트에 달력 표시
+  //MonthView Import 하여 뷰포트에 렌더링
   return (
     <div ref={calendarRef} className="overflow-auto h-full p-4" style={{ maxHeight: '770px' }}>
       {months.map(({ year, month }, index) => (
-        <MonthView key={index} year={year} month={month} events={events} />
+        <MonthView key={index} year={year} month={month} events={events} onDateClick={onDateClick}/>
       ))}
     </div>
   );
