@@ -64,7 +64,7 @@ const Calendar = forwardRef(({ events, setCurrentYear = () => { } }, ref) => {
   const calendarRef = useRef(null);
 
   // 오늘 날짜로 스크롤을 이동하는 함수
-  // forwradRef에서 받은 인자 ref 사용
+  // forwardRef에서 받은 인자 ref 사용
   useImperativeHandle(ref, () => ({
     scrollToToday: () => {
       const today = new Date();
@@ -155,7 +155,7 @@ const Calendar = forwardRef(({ events, setCurrentYear = () => { } }, ref) => {
 
   // 뷰포트에 달력 표시
   return (
-    <div ref={calendarRef} className="overflow-auto h-full p-4 bg-gray-950" style={{ maxHeight: '770px' }}>
+    <div ref={calendarRef} className="overflow-auto h-full p-4" style={{ maxHeight: '770px' }}>
       {months.map(({ year, month }, index) => (
         <MonthView key={index} year={year} month={month} events={events} />
       ))}
