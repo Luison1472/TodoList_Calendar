@@ -37,7 +37,16 @@ function ClushTask() {
   // To-Do 삭제
   const deleteTodo = (date, index) => {
     setEvents((prevEvents) => {
-      const updatedTodos = prevEvents[date].filter((_, i) => i !== index);
+      // 해당 날짜의 할 일 목록을 가져와, 삭제하려는 인덱스를 제외한 새로운 목록 생성
+      const updatedTodos = prevEvents[date].filter((todo, i) => i !== index);
+  
+     
+      if (updatedTodos.length === 0) {
+        const newEvents = { ...prevEvents }; 
+        delete newEvents[date]; 
+        return newEvents;  
+      }
+  
       return {
         ...prevEvents,
         [date]: updatedTodos,
