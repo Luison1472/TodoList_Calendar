@@ -8,6 +8,7 @@ const Calendar = forwardRef(({ events, setCurrentYear = () => { },onDateClick },
     { year: 2024, month: 10 }, // 11월
   ]);
   const calendarRef = useRef(null);
+  const observer = useRef(null);
 
   // 오늘 날짜로 스크롤을 이동하는 함수
   // forwardRef에서 받은 인자 ref 사용
@@ -21,7 +22,7 @@ const Calendar = forwardRef(({ events, setCurrentYear = () => { },onDateClick },
 
       if (targetMonthIndex !== -1) {
         const element = calendarRef.current.children[targetMonthIndex];
-        if (element) {
+        if (element) {              
           element.scrollIntoView({ behavior: 'smooth' });
         }
       }

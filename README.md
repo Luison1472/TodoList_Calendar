@@ -1,8 +1,40 @@
-# React + Vite
+# Todo + Calendar App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 간략 설명
 
-Currently, two official plugins are available:
+**Calendar**와 **Todo-List** 기능을 한 곳에서 제공하는 캘린더 웹/애플리케이션입니다.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Calendar**
+무한 스크롤을 통해 이전 달, 다음 달을 계속해서 탐색 가능합니다.
+1년이 지나갈 때 마다 상단에 표시된 ----년 표시는 자동으로 변경 됩니다.
+하단의 현재 버튼을 눌렀을 땐 현재 날짜에 맞는 달력을 보여줌으로서 편리함을 갖췄습니다.
+
+**Todo-List**
+유저는 특정 날짜를 클릭해서 그 날의 할 일을 직접 작성할 수 있습니다.
+'+' 버튼을 통해 특정 날짜에 일정을 추가할 수 있습니다.
+Check Box를 통해 완료한 일정을 표시할 수 있으며 삭제할 수 있습니다.
+모든 일정을 완료한 후, 일정을 모두 삭제할 시 달력의 이벤트 표시는 사라집니다.
+
+
+### 디자인
+개인적으로 깔끔하고 직관적인 **I-phone calendar** 디자인을 좋아해, 참고하여 사용자가 쉽게 탐색할 수 있도록 개발하였습니다.
+
+## 소스 빌드 및 실행 방법
+
+### 1. 요구 사항
+**개발 당시 버전**
+- Node.js : v20.10.0
+- npm : v10.8.3
+
+### 2. 설치 및 실행
+
+1. 프로젝트 클론
+   git clone <url>
+
+2. 의존성 설치
+   npm install
+
+3. 개발 서버 실행
+   npm run dev
+
+### 3. 주력으로 사용한 컴포넌트에대한 설명 및 사용 이유 
