@@ -34,7 +34,7 @@
 ### 입력된 일정이 날짜에 표시되는 화면
 <img src="./src/assets/second.png" alt="입력된 일정이 날짜에 표시되는 화면" width="300">
 
-### ToDO-List를 작성한 후의 완료 표시와 삭제 버튼 화면
+### ToDo-List를 작성한 후의 완료 표시와 삭제 버튼 화면
 <img src="./src/assets/fifth.png" alt="ToDO-List를 작성한 후의 완료 표시와 삭제 버튼 화면" width="300">
 
 ## 소스 빌드 및 실행 방법
