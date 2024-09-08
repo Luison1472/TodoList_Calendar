@@ -20,12 +20,22 @@ Check Box를 통해 완료한 일정을 표시할 수 있으며 삭제할 수 �
 개인적으로 깔끔하고 직관적인 **I-phone calendar** 디자인을 좋아해<br/>
 참고하여 사용자가 쉽게 탐색할 수 있도록 개발하였습니다.<br/>
 
-### 와이어 프레임
-[캘린더 기본 화면](./src/assets/first.png)<br/>
-[날짜를 직접 선택 시 화면](./src/assets/second.png)<br/>
-[+ 버튼을 통해 자유로운 날짜 입력 화면](./src/assets/third.png)<br/>
-[ToDO-List를 작성한 후의 완료 표시와 삭제 버튼 화면](./src/assets/fourth.png)<br/>
-[날짜와 Todo-List가 표시된 날짜](./src/assets/fifth.png)<br/>
+## 와이어프레임
+
+### 캘린더 기본 화면
+<img src="./src/assets/first.png" alt="캘린더 기본 화면" width="400">
+
+### 날짜를 직접 선택 시 화면
+<img src="./src/assets/second.png" alt="날짜를 직접 선택 시 화면" width="400">
+
+### + 버튼을 통해 자유로운 날짜 입력 화면
+<img src="./src/assets/third.png" alt="+ 버튼을 통해 자유로운 날짜 입력 화면" width="400">
+
+### ToDO-List를 작성한 후의 완료 표시와 삭제 버튼 화면
+<img src="./src/assets/fourth.png" alt="ToDO-List를 작성한 후의 완료 표시와 삭제 버튼 화면" width="400">
+
+### 날짜와 Todo-List가 표시된 날짜
+<img src="./src/assets/fifth.png" alt="날짜와 Todo-List가 표시된 날짜" width="400">
 
 ## 소스 빌드 및 실행 방법
 

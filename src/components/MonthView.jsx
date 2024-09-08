@@ -21,7 +21,7 @@ const getMonthDays = (year, month) => {
 function MonthView({ year, month, events, onDateClick }) {
   const monthDays = getMonthDays(year, month);
 
-  // 오늘 날짜를 저장하는 isToday 함수 (오늘 날짜로 돌아오게 하는 함수)
+  // 오늘 날짜를 저장하는 isToday 함수 
   const today = new Date();
   const isToday = (date) =>
     date &&

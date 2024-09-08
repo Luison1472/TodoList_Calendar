@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
 import MonthView from '/src/components/MonthView.jsx'; // MonthView 컴포넌트 임포트
 
-const Calendar = forwardRef(({ events, setCurrentYear = () => { },onDateClick }, ref) => {
+const Calendar = forwardRef(({ events, setCurrentYear = () => { }, onDateClick }, ref) => {
   const [months, setMonths] = useState([
     { year: 2024, month: 8 },  // 처음엔 9월 데이터로 ,시작 0번~
     { year: 2024, month: 9 },  // 10월
     { year: 2024, month: 10 }, // 11월
   ]);
   const calendarRef = useRef(null);
-  const observer = useRef(null);
 
   // 오늘 날짜로 스크롤을 이동하는 함수
   // forwardRef에서 받은 인자 ref 사용
