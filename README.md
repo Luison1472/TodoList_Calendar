@@ -23,19 +23,19 @@ Check Box를 통해 완료한 일정을 표시할 수 있으며 삭제할 수 �
 ## 와이어프레임
 
 ### 캘린더 기본 화면
-<img src="./src/assets/first.png" alt="캘린더 기본 화면" width="400">
+<img src="./src/assets/first.png" alt="캘린더 기본 화면" width="300">
 
 ### 날짜를 직접 선택 시 화면
-<img src="./src/assets/second.png" alt="날짜를 직접 선택 시 화면" width="400">
+<img src="./src/assets/third.png" alt="날짜를 직접 선택 시 화면" width="300">
 
 ### + 버튼을 통해 자유로운 날짜 입력 화면
-<img src="./src/assets/third.png" alt="+ 버튼을 통해 자유로운 날짜 입력 화면" width="400">
+<img src="./src/assets/fourth.png" alt="+ 버튼을 통해 자유로운 날짜 입력 화면" width="300">
+
+### 입력된 일정이 날짜에 표시되는 화면
+<img src="./src/assets/second.png" alt="입력된 일정이 날짜에 표시되는 화면" width="300">
 
 ### ToDO-List를 작성한 후의 완료 표시와 삭제 버튼 화면
-<img src="./src/assets/fourth.png" alt="ToDO-List를 작성한 후의 완료 표시와 삭제 버튼 화면" width="400">
-
-### 날짜와 Todo-List가 표시된 날짜
-<img src="./src/assets/fifth.png" alt="날짜와 Todo-List가 표시된 날짜" width="400">
+<img src="./src/assets/fifth.png"src="./src/assets/second.png" alt="ToDO-List를 작성한 후의 완료 표시와 삭제 버튼 화면" width="300">
 
 ## 소스 빌드 및 실행 방법
 
@@ -56,3 +56,48 @@ Check Box를 통해 완료한 일정을 표시할 수 있으며 삭제할 수 �
    npm run dev
 
 ### 3. 주력으로 사용한 컴포넌트에대한 설명 및 사용 이유 
+
+**MonthView.jsx & calendar.jsx**<br/>
+이 두 컴포넌트들을 주력으로 사용.<br/>
+
+1.**MonthView.jsx**<br/>
+- getMonthDays 함수를 통해 해당 월의 첫 번째 날짜가 시작하는 요일과 총 일수를 계산.
+
+사용 이유 => 달력의 기본적인 레이아웃을 만들며 특정 월의 날짜를 정확히 렌더링 할 수 있도록 함.
+
+- isToday 함수를 통해 오늘 날짜 강조
+
+사용 이유 => && 연산자를 통해 현재 날짜를 비교하고 빨간 배경으로 강조 할 수 있도록 하였음.
+
+- onDateClick 날짜 클릭 이벤트 추가.
+
+사용 이유 => 특정 날짜를 클릭하면 ondateClick 함수가 호출되며, 선택된 날짜에 관한 일정을 추가할 수 있도록 팝업창이 나오도록 사용하기 위해 사용한 함수.
+
+
+2.**Calendar.jsx**<br/>
+- 여러 개의 월 단위 달력(MonthView 컴포넌트) 관리.
+
+사용 이유 => 코드 가독성과 유지 보수의 편안함을 위해 따로 관리 하였음.
+
+- 수동 스크롤 이벤트를 통해 일정들을 무한으로 탐색할 수 있도록 구현.
+
+사용 이유 => 수 많은 달력을 한번에 로드하는 대신, 필요한 달만 동적으로 로드하여 성능 최적화
+
+- useInperativeHandle로 오늘 날짜 스크롤 이동 기능 구현.
+
+사용 이유 => useRef를 통해 Calendar 컴포넌트를 외부에서도 참조 할 수 있도록 하였으며, scrollToToday 함수를 호출하면 자동으로 현재 날짜가 포함된 월로 스크롤 이동을 할 수 있음.
+
+- onDateClick 콜백 전달.
+사용 이유 => 날짜 클릭 시 팝업을 띄우거나, 일정을 추가하는 등의 동작을 쉽게 처리할 수 있도록 onDateClick 콜백을 MonthView에 전달하는 방식 사용.
+
+**수동 스크롤 이벤트로 사용한 이유**
+Intersection Observer API를 통해 구현할 예정이였으나
+observer는 특정 화면의 지점을 놓고 ~% 지점을 통과할 시 자동으로 렌더링 하는 방식.
+
+무한 캘린더인 경우 과거, 현재, 미래를 왔다갔다 하며 탐색해야하는 구조상, 최상단 + 최하단에 특정 포인트를 둔다면 무한 루프에 빠지는 오류가 발생.
+
+결과적으로, 수동으로 스크롤 이벤트를 지정하여 스크롤 할 때마다 렌더링 되는 방식으로 무한 루프 버그를 해결 할 수 있었음.
+
+*스크롤 팅김 버그*
+이유 - 수동 스크롤 이벤트를 통해 무한 스크롤을 구현 하였으나, 스크롤이 최상단+최하단으로 이동할 때마다 새로운 달력이 렌더링 되면서 전체 콘텐츠의 높이가 변동되게 되고 뷰포트가 위 아래로 흔들리며 튕기는 현상이 발생해 안좋은 사용자적 경험을 주게 되었음.
+해결 - useRef로 참조된 calendarRef를 통해 scrollTopBefore 값에 (scrollHeightAfter - scrollHeightBefore) 만큼 더해준다면 변동된 스크롤 높이만큼 스크롤 위치를 조정하여 자연스럽게 스크롤이 조정 되었음.
