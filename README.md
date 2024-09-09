@@ -90,7 +90,7 @@
 **MonthView.jsx & calendar.jsx**<br/>
 이 두 컴포넌트들을 주력으로 사용.<br/>
 
-1.**MonthView.jsx**<br/>
+1. **MonthView.jsx**<br/>
 
 - **getMonthDays 함수를 통해 해당 월의 첫 번째 날짜가 시작하는 요일과 총 일수를 계산.**
 
@@ -104,7 +104,7 @@
 
   사용 이유 => 특정 날짜를 클릭하면 ondateClick 함수가 호출되며, 선택된 날짜에 관한 일정을 추가할 수 있도록 팝업창이 나오도록 사용하기 위해 사용한 함수.
 
-2.**Calendar.jsx**<br/>
+2. **Calendar.jsx**<br/>
 
 - **여러 개의 월 단위 달력(MonthView 컴포넌트) 관리.**
 
