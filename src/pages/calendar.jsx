@@ -101,12 +101,12 @@ const Calendar = forwardRef(({ events, setCurrentYear = () => { }, onDateClick }
 
   //MonthView Import 하여 뷰포트에 렌더링
   return (
-    <div ref={calendarRef} className="overflow-auto h-full p-4" style={{ maxHeight: '770px' }}>
-      {months.map(({ year, month }, index) => (
-        <MonthView key={index} year={year} month={month} events={events} onDateClick={onDateClick}/>
-      ))}
-    </div>
-  );
+  <div ref={calendarRef} className="overflow-auto h-full p-4 scrollbar-hide" style={{ maxHeight: '770px' }}>
+    {months.map(({ year, month }, index) => (
+      <MonthView key={index} year={year} month={month} events={events} onDateClick={onDateClick}/>
+    ))}
+  </div>
+);
 });
 
 export default Calendar;

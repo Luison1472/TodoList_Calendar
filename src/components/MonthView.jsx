@@ -34,23 +34,23 @@ function MonthView({ year, month, events, onDateClick }) {
       <h2 className="text-xl font-bold text-red-600 mb-4">
         {new Date(year, month).toLocaleString('default', { month: 'long' })}
       </h2>
-      <div className="grid grid-cols-7 gap-2 text-center border-b border-gray-800">
-        {monthDays.map((day, index) => (
-          <div
-            key={index}
-            className={`h-9 w-9 flex items-center justify-center
-              ${day ? 'text-white' : ''}
-              ${day && events && events[day.toDateString()] ? 'bg-yellow-400 rounded-full text-black font-bold' : ''}
-              ${day ? 'cursor-pointer' : ''}
-              ${isToday(day) ? 'bg-red-600 text-white rounded-full' : ''}`}
-            onClick={() => day && onDateClick(day)}  // 날짜 클릭 시 팝업 열기
-          >
-            <span className="leading-none">
-              {day ? day.getDate() : ''}
-            </span>
-          </div>
-        ))}
-      </div>
+      <div className="grid grid-cols-7 gap-2 gap-y-6 text-center border-b border-gray-800 w-full">
+  {monthDays.map((day, index) => (
+    <div
+      key={index}
+      className={`flex items-center justify-center
+        ${day ? 'text-white' : ''}
+        ${day && events && events[day.toDateString()] ? 'bg-yellow-400 rounded-full font-bold' : ''}
+        ${day ? 'cursor-pointer' : ''}
+        ${isToday(day) ? 'bg-red-600 rounded-full font-bold ' : ''}`}
+      onClick={() => day && onDateClick(day)}
+    >
+      <span>
+        {day ? day.getDate() : ''}
+      </span>
+    </div>
+  ))}
+</div>
     </div>
   );
 }
