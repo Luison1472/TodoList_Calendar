@@ -32,7 +32,8 @@
   가독성이 떨어지는 단점이 있지만 반응형 디자인을 쉽게 구현할 수 있는 장점으로 사용했습니다.
 
 ## 와이어프레임
-<a href="[(https://www.figma.com/design/JWiJVK0EDodMaKGEcWr15d/clush-%EA%B3%BC%EC%A0%9C_%EC%BA%98%EB%A6%B0%EB%8D%94%2B%EC%9D%BC%EC%A0%95?node-id=0-1&t=T1Wvheiu9En3iwKT-1)]" target="_blank">**Figma 와이어프레임 링크**</a>
+
+<a href="https://www.figma.com/design/JWiJVK0EDodMaKGEcWr15d/clush-%EA%B3%BC%EC%A0%9C_%EC%BA%98%EB%A6%B0%EB%8D%94%2B%EC%9D%BC%EC%A0%95?node-id=0-1&t=T1Wvheiu9En3iwKT-1" target="_blank">**Figma 와이어프레임 링크**</a>
 
 ### 캘린더 기본 화면
 
