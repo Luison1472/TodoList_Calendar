@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, {useEffect, useState, useRef } from 'react';
 import Calendar from './calendar';
 import Header from '../components/Layouts/Header';
 import Footer from '../components/Layouts/Footer';
@@ -6,11 +6,21 @@ import TodoPopup from '../components/Layouts/TodoPopup';
 import '../index.css';
 
 function ClushTask() {
-    const [events, setEvents] = useState({});
+    const [events, setEvents] = useState(() => {
+        // localStorage에서 데이터를 불러오기
+        const storedEvents = localStorage.getItem('events');
+        return storedEvents ? JSON.parse(storedEvents) : {}; // 데이터가 있으면 불러오고, 없으면 초기화
+    });
     const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [selectedDate, setSelectedDate] = useState(null);
     const calendarRef = useRef(null);
+  
+   useEffect(() => {
+        if (events) {
+            localStorage.setItem('events', JSON.stringify(events));
+        }
+    }, [events]);
 
     const addEvent = (date, event) => {
     setEvents((prevEvents) => ({
