@@ -4,7 +4,7 @@
 
 **Calendar**와 **Todo-List** 기능을 한 곳에서 제공하는 모바일/데스크탑 반응형 캘린더 웹/애플리케이션입니다.
 
-<a href="https://todolistcalendar.vercel.app/" target="_blank">**[https://todolistcalendar.vercel.app/]**</a>를 통해 직접 사용해볼 수 있습니다.
+<a href="https://todolistcalendar.vercel.app/" target="_blank">**https://todolistcalendar.vercel.app/**</a>를 통해 직접 사용해볼 수 있습니다.
 
 ### Calendar
 
