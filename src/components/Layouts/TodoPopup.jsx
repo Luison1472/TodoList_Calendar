@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 
 function TodoPopup({ selectedDate, onClose, addEvent, existingTodos, toggleTodoCompletion, deleteTodo }) {
   const [todoText, setTodoText] = useState('');
-  const [tempDate, setTempDate] = useState(selectedDate ? selectedDate.toISOString().split('T')[0] : '');
-
+  
+  const [startDate, setStartDate] = useState(selectedDate ? selectedDate.toISOString().split('T')[0] : '');
+  const [endDate, setEndDate] = useState(selectedDate ? selectedDate.toISOString().split('T')[1] : '');
   // 요일 계산 함수
   const getDayOfWeek = (dateString) => {
     const date = new Date(dateString);
@@ -13,16 +14,23 @@ function TodoPopup({ selectedDate, onClose, addEvent, existingTodos, toggleTodoC
 
   // 새로운 To-Do 추가
   const handleSubmit = () => {
-    const date = selectedDate ? selectedDate.toDateString() : new Date(tempDate).toDateString();
-    if (todoText.trim() && date) {
-      addEvent(date, { text: todoText, completed: false }); // 새로운 To-Do는 완료되지 않은 상태로 추가
+    const start = new Date(startDate).toDateString();
+    const end = new Date(endDate).toDateString();
+    if (todoText.trim() && start && end) {
+      // 시작일부터 종료일까지의 범위에 대해 모든 날짜에 Todo 추가
+      let currentDate = new Date(start);
+      while (currentDate <= new Date(end)) {
+        addEvent(currentDate.toDateString(), { text: todoText, completed: false });
+        currentDate.setDate(currentDate.getDate() + 1);
+      }
       setTodoText('');  // 입력 필드 초기화
-      if (!selectedDate) setTempDate('');  // 날짜 선택 모드일 때만 초기화
+      setStartDate('');
+      setEndDate('');
     }
   };
 
   const handleDateChange = (e) => {
-    setTempDate(e.target.value);  // 날짜 선택
+    setStartDate(e.target.value);  // 날짜 선택
   };
 
   return (
@@ -36,19 +44,33 @@ function TodoPopup({ selectedDate, onClose, addEvent, existingTodos, toggleTodoC
         ) : (
           <div className="mb-4">
             <h2 className="text-lg mb-4">할일을 추가할 날짜를 입력하세요</h2>
+            <p>Start</p>
             <input
               type="date"
-              value={tempDate}
+              value={startDate}
               onChange={handleDateChange}
               className="w-full p-2 border"
             />
             {/* 선택된 날짜와 요일을 공백으로 구분하여 표시 */}
-            {tempDate && (
-              <p className="mt-2 text-sm text-gray-500">
-                {new Date(tempDate).toLocaleDateString()} {getDayOfWeek(tempDate)}
-              </p>
-            )}
-          </div>
+            {startDate && (
+            <p className="mt-2 text-sm text-gray-500">
+              {new Date(startDate).toLocaleDateString()} {getDayOfWeek(startDate)}
+            </p>
+          )}
+
+          <p className="mt-2">End</p>
+          <input
+            type="date"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+            className="w-full p-2 border"
+          />
+          {endDate && (
+            <p className="mt-2 text-sm text-gray-500">
+              {new Date(endDate).toLocaleDateString()} {getDayOfWeek(endDate)}
+            </p>
+          )}
+        </div>
         )}
 
         {/* 작성한 TodoList 보여주기 */}
@@ -60,7 +82,7 @@ function TodoPopup({ selectedDate, onClose, addEvent, existingTodos, toggleTodoC
                   <input
                     type="checkbox"
                     checked={todo.completed}
-                    onChange={() => toggleTodoCompletion(selectedDate ? selectedDate.toDateString() : new Date(tempDate).toDateString(), index)}
+                    onChange={() => toggleTodoCompletion(selectedDate ? selectedDate.toDateString() : new Date(startDate).toDateString(), index)}
                     className="mr-2"
                   />
                   <span className={todo.completed ? 'line-through text-gray-500 w-52' : 'w-52'}>
@@ -68,7 +90,7 @@ function TodoPopup({ selectedDate, onClose, addEvent, existingTodos, toggleTodoC
                   </span>
                 </div>
                 <button
-                  onClick={() => deleteTodo(selectedDate ? selectedDate.toDateString() : new Date(tempDate).toDateString(), index)}
+                  onClick={() => deleteTodo(selectedDate ? selectedDate.toDateString() : new Date(startDate).toDateString(), index)}
                   className="text-red-500 hover:text-red-700"
                 >
                   삭제
@@ -90,7 +112,7 @@ function TodoPopup({ selectedDate, onClose, addEvent, existingTodos, toggleTodoC
 
         <div className="flex justify-end gap-2">
           <button onClick={onClose} className="px-4 py-2 bg-gray-500 text-white rounded">닫기</button>
-          <button onClick={handleSubmit} className="px-4 py-2 bg-gray-950 text-white rounded" disabled={!todoText.trim() || (!selectedDate && !tempDate)}>
+          <button onClick={handleSubmit} className="px-4 py-2 bg-gray-950 text-white rounded" disabled={!todoText.trim() || (!selectedDate && !startDate)}>
             저장
           </button>
         </div>

@@ -40,9 +40,9 @@ function MonthView({ year, month, events, onDateClick }) {
       key={index}
       className={`flex items-center justify-center
         ${day ? 'text-white' : ''}
-        ${day && events && events[day.toDateString()] ? 'bg-yellow-400 rounded-full font-bold' : ''}
+        ${day && events && events[day.toDateString()] ? 'border-b border-yellow-300 font-bold' : ''}
         ${day ? 'cursor-pointer' : ''}
-        ${isToday(day) ? 'bg-red-600 rounded-full font-bold ' : ''}`}
+        ${isToday(day) ? 'bg-red-600 rounded-full border-none font-bold ' : ''}`}
       onClick={() => day && onDateClick(day)}
     >
       <span>
